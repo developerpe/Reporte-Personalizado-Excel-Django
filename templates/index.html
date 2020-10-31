@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reporte Personalizado en Excel con Django</title>
+</head>
+<body>
+    {% if queryset %}
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Direccion</th>
+                    <th>Edad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for q in queryset %}
+                    <tr>
+                        <td>{{ q.nombre }}</td>
+                        <td>{{ q.apellidos }}</td>
+                        <td>{{ q.direccion }}</td>
+                        <td>{{ q.edad }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <h1>No hay datos registrados</h1>
+    {% endif %}
+    <form action="{% url 'reporte' %}" method="get">
+        <input type="text" name="campo" placeholder="Ingrese una edad">
+        <button type="submit">REPORTE EN EXCEL</button>
+    </form>
+</body>
+</html>
